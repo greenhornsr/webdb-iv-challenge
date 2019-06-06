@@ -1,12 +1,13 @@
 const db = require('../data/dbConfig')
 
-module.exports(
+module.exports = {  
     findDish,
     addDish,
     findDishById,
     findRecipes,
     addRecipe
-)
+}
+
 
 function findDish() {
     return db('dishes')
