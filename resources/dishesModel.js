@@ -20,7 +20,7 @@ function findDishById(id) {
 }
 
 async function addDish(newDish) {
-    console.log(newDish)
+    // console.log(newDish)
     const [id] = await db('dishes')
     .insert(newDish);
 
@@ -28,10 +28,12 @@ async function addDish(newDish) {
 }
 
 function findRecipes(id) {
-    return db('recipes')
-    .where('dish_id', id)
-    .first()
+    return db.select('dishes.*', 'recipes.*')
+    .from('recipes')
+    .leftJoin('dishes', 'dishes.id', 'recipes.dish_id')
+    .where('recipes.dish_id', id)
 }
+
 
 async function addRecipe(id, newRecipe) {
     return null
