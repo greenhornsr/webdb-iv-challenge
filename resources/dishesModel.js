@@ -20,6 +20,7 @@ function findDishById(id) {
 }
 
 async function addDish(newDish) {
+    console.log(newDish)
     const [id] = await db('dishes')
     .insert(newDish);
 

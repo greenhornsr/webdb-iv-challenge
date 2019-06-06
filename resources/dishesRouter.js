@@ -3,6 +3,8 @@ const dbDish = require('./dishesModel');
 
 const router = express.Router();
 
+router.use(express.json());
+
 // get dishes
 router.get('/', (req, res) => {
     dbDish.findDish()
@@ -18,6 +20,7 @@ router.get('/', (req, res) => {
 // add dish
 router.post('/', (req, res) => {
     const newDish = req.body
+    console.log("This is my new Dish: ",newDish)
     dbDish.addDish(newDish)
     .then(count => {
         const unit = count > 1 ? 'dishes': 'dish';
