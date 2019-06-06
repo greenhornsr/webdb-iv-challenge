@@ -17,12 +17,30 @@ router.get('/', (req, res) => {
 
 // add dish
 router.post('/', (req, res) => {
+    const newDish = req.body
+    dbDish.addDish(newDish)
+    .then(count => {
+        const unit = count > 1 ? 'dishes': 'dish';
+        count ? res.status(201).json({success: true, message: `${newDish.name} ${unit} added!`, newDish}):
+        res.status(400).json({success: false, message: 'could not add new Dish!'})    
+    })
+    .catch(err => {
+        res.status(500).json(errorRef(err))
+    })
     
 })
 
 // get dish by id
 router.get('/:id', (req, res) => {
-    
+    const {id} = req.params;
+    dbDish.findDishById(id)
+    .then(dish => {
+        dish ? res.status(200).json({success: true, message: `${dish.name} has been found!`, dish}):
+        res.status(404).json({success: false, message: `no such dish with id ${id}`})
+    })
+    .catch(err => {
+        res.status(500).json(errorRef(err));
+    })
 })
 
 // get recipes for dish

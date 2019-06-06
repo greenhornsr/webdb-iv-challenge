@@ -17,7 +17,7 @@ server.get('/', logger, (req, res) => {
 
 // logger middleware
 function logger(req, res, next) {
-    console.log(`${req.method} request to route ${req.url} at [${new Date().toISOString()}]`);
+    console.log(`\n${req.method} request to route ${req.url} at [${new Date().toISOString()}]\n`);
     next();
 }
 
